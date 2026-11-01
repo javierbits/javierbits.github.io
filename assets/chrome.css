@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap");
 
 /*
- * jvr0x.com shared chrome: header + footer.
+ * javierbits.com shared chrome: header + footer.
  *
- * Loaded root-relative (/assets/chrome.css) by every page on jvr0x.com, including project
+ * Loaded root-relative (/assets/chrome.css) by every page on javierbits.com, including project
  * pages served from other repos (Tailwind on SolDecode, custom CSS on murmur, tok-sim,
  * dgx-spark-bench). Contract: CHROME.md / AGENTS.md.
  *

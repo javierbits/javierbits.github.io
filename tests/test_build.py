@@ -70,7 +70,7 @@ def test_build_renders_head_chrome_cards_and_sitemap(tmp_path):
     assert "old header" not in out and '<header class="jx-header">' in out
     assert '<footer class="jx-footer">' in out
     assert "<title>jvr0x</title>" in out
-    assert '<meta property="og:url" content="https://jvr0x.com/">' in out
+    assert '<meta property="og:url" content="https://javierbits.com/">' in out
     assert '<meta name="twitter:card" content="summary_large_image">' in out
     # Data is escaped, cards are divs (no nested anchors), external links get noopener.
     assert "A &lt;b&gt;" in out and "desc &amp; stuff" in out and "Local AI &lt;test&gt; &amp; more" in out
@@ -78,7 +78,7 @@ def test_build_renders_head_chrome_cards_and_sitemap(tmp_path):
     assert '<a href="https://example.com/a" rel="noopener">' in out
     assert '<a href="/more/">more</a>' in out
     sitemap = (site / "sitemap.xml").read_text(encoding="utf-8")
-    assert "<loc>https://jvr0x.com/</loc>" in sitemap and "<loc>https://jvr0x.com/tok-sim/</loc>" in sitemap
+    assert "<loc>https://javierbits.com/</loc>" in sitemap and "<loc>https://javierbits.com/tok-sim/</loc>" in sitemap
 
 
 def test_build_is_idempotent(tmp_path):
@@ -216,7 +216,7 @@ def test_hero_shows_the_name_once():
 # ── Hugging Face models (data/models.json, assets/models.js) ─────────────────
 
 GGUF_MODEL = {
-    "id": "jvr0x/Javi0.3-4B-GGUF",
+    "id": "javierbits/Javi0.3-4B-GGUF",
     "library_name": "gguf",
     "pipeline_tag": "text-generation",
     "private": False,
@@ -242,7 +242,7 @@ GGUF_MODEL = {
 }
 
 EXL3_MODEL = {
-    "id": "jvr0x/Javi0.3-4B-EXL3",
+    "id": "javierbits/Javi0.3-4B-EXL3",
     "library_name": "exllamav3",
     "pipeline_tag": "text-generation",
     "private": False,
@@ -256,8 +256,8 @@ EXL3_MODEL = {
         "agent",
         "tool-use",
         "dgx-spark",
-        "base_model:jvr0x/Javi0.3-4B",
-        "base_model:quantized:jvr0x/Javi0.3-4B",
+        "base_model:javierbits/Javi0.3-4B",
+        "base_model:quantized:javierbits/Javi0.3-4B",
         "license:apache-2.0",
     ],
     "siblings": [{"rfilename": "model.safetensors"}],
@@ -269,7 +269,7 @@ def test_hf_entry_derives_a_whole_card_from_tags():
     entry = build.hf_entry(GGUF_MODEL)
     assert entry["hf"] == "Javi0.3-4B-GGUF"
     assert entry["title"] == "Javi0.3-4B-GGUF"
-    assert entry["url"] == "https://huggingface.co/jvr0x/Javi0.3-4B-GGUF"
+    assert entry["url"] == "https://huggingface.co/javierbits/Javi0.3-4B-GGUF"
     assert entry["description"] == (
         "GGUF fine-tune of Qwen/Qwen3.5-4B. LoRA-tuned with Unsloth for agent tool use. Trained on one DGX Spark."
     )
@@ -299,7 +299,7 @@ def test_hf_entry_keeps_hand_written_copy_but_takes_the_url_from_huggingface():
     entry = build.hf_entry(GGUF_MODEL, curated)
     assert entry["title"] == "Javi0.3-4B GGUF" and entry["description"] == "My own words."
     assert entry["meta"] == "GGUF · Q4_K_M / Q8_0 · base Qwen/Qwen3.5-4B · apache-2.0"
-    assert entry["hf"] == "Javi0.3-4B-GGUF" and entry["url"] == "https://huggingface.co/jvr0x/Javi0.3-4B-GGUF"
+    assert entry["hf"] == "Javi0.3-4B-GGUF" and entry["url"] == "https://huggingface.co/javierbits/Javi0.3-4B-GGUF"
 
 
 def test_fetch_hf_models_keeps_only_public_ungated_repos_of_the_author(monkeypatch):
@@ -318,8 +318,8 @@ def test_fetch_hf_models_keeps_only_public_ungated_repos_of_the_author(monkeypat
 
     monkeypatch.setattr(build, "hf_get", fake_get)
     models = build.fetch_hf_models()
-    assert "author=jvr0x" in seen["url"] and "sort=lastModified" in seen["url"] and "expand[]=siblings" in seen["url"]
-    assert [m["id"] for m in models] == ["jvr0x/Javi0.3-4B-GGUF"]
+    assert "author=javierbits" in seen["url"] and "sort=lastModified" in seen["url"] and "expand[]=siblings" in seen["url"]
+    assert [m["id"] for m in models] == ["javierbits/Javi0.3-4B-GGUF"]
 
 
 def test_fetch_hf_models_rejects_a_response_that_is_not_a_list(monkeypatch):
@@ -337,10 +337,10 @@ def test_refresh_models_adds_new_repos_and_drops_deleted_ones(tmp_path, monkeypa
         {
             "hf": "Javi0.3-4B-GGUF",
             "title": "My words",
-            "url": "https://huggingface.co/jvr0x/Javi0.3-4B-GGUF",
+            "url": "https://huggingface.co/javierbits/Javi0.3-4B-GGUF",
             "description": "Hand written.",
         },
-        {"hf": "DeletedRepo", "title": "Gone", "url": "https://huggingface.co/jvr0x/DeletedRepo"},
+        {"hf": "DeletedRepo", "title": "Gone", "url": "https://huggingface.co/javierbits/DeletedRepo"},
         {"title": "Somewhere else", "url": "https://example.com/model"},
     ]
     (data / "models.json").write_text(json.dumps(committed), encoding="utf-8")
@@ -351,13 +351,13 @@ def test_refresh_models_adds_new_repos_and_drops_deleted_ones(tmp_path, monkeypa
     assert [e.get("hf") for e in entries] == ["Javi0.3-4B-EXL3", "Javi0.3-4B-GGUF", None]
     assert [e["title"] for e in entries] == ["Javi0.3-4B-EXL3", "My words", "Somewhere else"]
     assert entries[1]["description"] == "Hand written."
-    assert entries[1]["url"] == "https://huggingface.co/jvr0x/Javi0.3-4B-GGUF"
+    assert entries[1]["url"] == "https://huggingface.co/javierbits/Javi0.3-4B-GGUF"
 
 
 def test_models_page_is_wired_to_read_huggingface_live():
     """The live list needs its hook, its script and a data-hf key on every committed card, or cards duplicate."""
     page = (REPO / "models" / "index.html").read_text(encoding="utf-8")
-    assert '<div class="cards" data-hf-models="jvr0x">' in page
+    assert '<div class="cards" data-hf-models="javierbits">' in page
     assert '<script src="/assets/models.js"></script>' in page
     block = page[page.index("<!-- jx:cards models -->") : page.index("<!-- /jx:cards -->")]
     committed = json.loads((REPO / "data" / "models.json").read_text(encoding="utf-8"))

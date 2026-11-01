@@ -1,4 +1,4 @@
-# jvr0x.com: everything is public. Search engines and AI crawlers are welcome.
+# javierbits.com: everything is public. Search engines and AI crawlers are welcome.
 User-agent: *
 Allow: /
 
@@ -70,5 +70,5 @@ User-agent: YouBot
 Allow: /
 
 # Crawlers only read the root robots.txt, so project sitemaps on this domain are listed here too.
-Sitemap: https://jvr0x.com/sitemap.xml
-Sitemap: https://jvr0x.com/soldecode-extension/sitemap.xml
+Sitemap: https://javierbits.com/sitemap.xml
+Sitemap: https://javierbits.com/soldecode-extension/sitemap.xml

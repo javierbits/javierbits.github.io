@@ -20,7 +20,7 @@ from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = "https://jvr0x.com"
+SITE = "https://javierbits.com"
 # Served by other repos on the same domain (GitHub Pages project sites).
 PROJECT_PREFIXES = ("/tok-sim/", "/dgx-spark-bench/", "/murmur/", "/soldecode-extension/")
 REQUIRED_META = (
@@ -103,7 +103,7 @@ def check_page(path: str) -> list[str]:
         problems.append(f"{path}: twitter:card should be summary_large_image")
     for ref in scan.refs:
         target = urlparse(urljoin(url, ref))
-        if target.scheme not in ("http", "https") or target.netloc != "jvr0x.com":
+        if target.scheme not in ("http", "https") or target.netloc != "javierbits.com":
             continue
         if target.path.startswith(PROJECT_PREFIXES):
             continue

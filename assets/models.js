@@ -1,6 +1,6 @@
 /*
  * Models page: renders the Hugging Face catalogue live, so publishing a model is enough for
- * it to appear on jvr0x.com/models/ without a site rebuild.
+ * it to appear on javierbits.com/models/ without a site rebuild.
  *
  * The committed cards (tools/build.py --models) are the crawlable, no-JS baseline. This script
  * refines that list once the request comes back:

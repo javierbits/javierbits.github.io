@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds jvr0x.com in place: shared head tags, header/footer chrome, data-driven cards, sitemap.
+"""Builds javierbits.com in place: shared head tags, header/footer chrome, data-driven cards, sitemap.
 
 The committed HTML is the served output (GitHub Pages serves the repo root as-is, no build on
 GitHub), so run this after editing partials/, data/ or a page, and commit the result:
@@ -31,13 +31,13 @@ from pathlib import Path
 from urllib.parse import quote_plus
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = "https://jvr0x.com"
+SITE = "https://javierbits.com"
 DEFAULT_OG_IMAGE = f"{SITE}/assets/og-default.png"
 
-AI_MODELS_REPO = "jvr0x/ai-models"
-BENCH_REPO = "jvr0x/dgx-spark-bench"
+AI_MODELS_REPO = "javierbits/ai-models"
+BENCH_REPO = "javierbits/dgx-spark-bench"
 
-HF_AUTHOR = "jvr0x"
+HF_AUTHOR = "javierbits"
 HF_API = "https://huggingface.co/api/models"
 HF_FIELDS = ("cardData", "downloads", "lastModified", "likes", "library_name", "pipeline_tag", "siblings", "tags")
 HF_MAX_TAGS = 4
@@ -267,7 +267,7 @@ def render_head(page: dict) -> str:
         f'<meta name="description" content="{desc}">',
         f'<link rel="canonical" href="{esc(url)}">',
         '<meta property="og:type" content="website">',
-        '<meta property="og:site_name" content="jvr0x">',
+        '<meta property="og:site_name" content="javierbits">',
         f'<meta property="og:title" content="{title}">',
         f'<meta property="og:description" content="{desc}">',
         f'<meta property="og:url" content="{esc(url)}">',
@@ -275,8 +275,8 @@ def render_head(page: dict) -> str:
         '<meta property="og:image:width" content="1200">',
         '<meta property="og:image:height" content="630">',
         '<meta name="twitter:card" content="summary_large_image">',
-        '<meta name="twitter:site" content="@jvr0x">',
-        '<meta name="twitter:creator" content="@jvr0x">',
+        '<meta name="twitter:site" content="@javierbits">',
+        '<meta name="twitter:creator" content="@javierbits">',
         f'<meta name="twitter:title" content="{title}">',
         f'<meta name="twitter:description" content="{desc}">',
         f'<meta name="twitter:image" content="{esc(image)}">',
@@ -382,7 +382,7 @@ def parse_recipe_yaml(text: str) -> dict:
 
 
 def fetch_ai_models() -> list[dict]:
-    """Builds recipe card entries for every *.yaml at the root of jvr0x/ai-models main."""
+    """Builds recipe card entries for every *.yaml at the root of javierbits/ai-models main."""
     listing = json.loads(gh_api(f"repos/{AI_MODELS_REPO}/contents?ref=main"))
     entries = []
     for f in sorted(listing, key=lambda f: f["name"]):
@@ -405,7 +405,7 @@ def fetch_ai_models() -> list[dict]:
 
 
 def fetch_bench(ai_model_stems: set[str]) -> list[dict]:
-    """Builds bench-config entries from jvr0x/dgx-spark-bench results/*.json.
+    """Builds bench-config entries from javierbits/dgx-spark-bench results/*.json.
 
     Only measured series with a recipe_url are listed, one entry per recipe_url.
     Reason: a bench config is cross-linked to an ai-models recipe only on an exact name
@@ -475,7 +475,7 @@ def refresh_recipes(data_dir: Path) -> None:
 
 def hf_get(url: str) -> object:
     """GETs a Hugging Face API URL and returns the parsed JSON."""
-    request = urllib.request.Request(url, headers={"User-Agent": "jvr0x.com site build (tools/build.py)"})
+    request = urllib.request.Request(url, headers={"User-Agent": "javierbits.com site build (tools/build.py)"})
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             return json.load(response)

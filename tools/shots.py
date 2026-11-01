@@ -45,7 +45,7 @@ OVERFLOW_JS = """(vw) => {
 def site_paths() -> list[str]:
     """Returns sitemap paths served by this repo."""
     xml = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
-    paths = [re.sub(r"^https://jvr0x\.com", "", u) for u in re.findall(r"<loc>([^<]+)</loc>", xml)]
+    paths = [re.sub(r"^https://javierbits\.com", "", u) for u in re.findall(r"<loc>([^<]+)</loc>", xml)]
     return [p for p in paths if not p.startswith(PROJECT_PREFIXES)]
 
 

@@ -32,7 +32,7 @@ from urllib.parse import quote_plus
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://javierbits.com"
-DEFAULT_OG_IMAGE = f"{SITE}/assets/og-default.png"
+DEFAULT_OG_IMAGE = f"{SITE}/assets/og-2026-11.png"
 
 AI_MODELS_REPO = "javierbits/ai-models"
 BENCH_REPO = "javierbits/dgx-spark-bench"

@@ -1,4 +1,4 @@
-"""Renders assets/og-default.png (1200x630) from tools/og-template.html with Playwright.
+"""Renders assets/og-2026-11.png (1200x630) from tools/og-template.html with Playwright.
 
 Usage (needs Playwright + Chromium and network for Google Fonts):
     python tools/og.py
@@ -11,7 +11,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE = ROOT / "tools" / "og-template.html"
-OUT = ROOT / "assets" / "og-default.png"
+OUT = ROOT / "assets" / "og-2026-11.png"
 WIDTH, HEIGHT = 1200, 630
 
 

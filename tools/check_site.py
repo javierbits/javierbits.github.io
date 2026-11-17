@@ -7,7 +7,7 @@ Usage: python3 tools/check_site.py      (exit code 1 on any problem; stdlib only
   with absolute URLs, and canonical == og:url with a trailing slash.
 - Every root-relative or relative href/src in those pages must resolve to a file in the
   repo, except paths served by other repos (PROJECT_PREFIXES).
-- assets/og-default.png must be exactly 1200x630.
+- assets/og-2026-11.png must be exactly 1200x630.
 """
 
 from __future__ import annotations
@@ -128,12 +128,12 @@ def main() -> int:
         if path.startswith(PROJECT_PREFIXES):
             continue
         problems += check_page(path)
-    size = png_size(ROOT / "assets" / "og-default.png")
+    size = png_size(ROOT / "assets" / "og-2026-11.png")
     if size != (1200, 630):
-        problems.append(f"assets/og-default.png is {size[0]}x{size[1]}, expected 1200x630")
+        problems.append(f"assets/og-2026-11.png is {size[0]}x{size[1]}, expected 1200x630")
     for p in problems:
         print("FAIL", p)
-    print(f"checked {len(paths)} sitemap URLs, og-default.png {size[0]}x{size[1]}: {len(problems)} problem(s)")
+    print(f"checked {len(paths)} sitemap URLs, og-2026-11.png {size[0]}x{size[1]}: {len(problems)} problem(s)")
     return 1 if problems else 0
 
 
